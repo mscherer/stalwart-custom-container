@@ -12,7 +12,7 @@ PACKAGES=
 # possible features:
 # storage:
 #   sqlite -- sqlite storage
-SQLITE=
+SQLITE=1
 #   postgres -- postgres storage
 POSTGRES=
 #   mysql -- mysql storage
@@ -35,7 +35,7 @@ fi
 
 # I just want the smallest possible binary, so I enable nothing for now
 #FEATURES="--no-default-features"
-if [ -v FEATURES ]; then
+if [ -n "$FEATURES" ]; then
 	FEATURES="--features $FEATURES"
 fi;
 FEATURES="--no-default-features $FEATURES"
