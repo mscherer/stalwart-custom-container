@@ -14,11 +14,11 @@ PACKAGES=
 #   sqlite -- sqlite storage
 SQLITE=1
 #   postgres -- postgres storage
-POSTGRES=
+#POSTGRES=1
 #   mysql -- mysql storage
-MYSQL=
+#MYSQL=1
 # rocks -- storage on disk
-ROCKS=
+ROCKS=1
 
 # s3 -- support any s3 compatible storage 
 # redis -- redis support
@@ -32,6 +32,10 @@ ROCKS=
 if [ -v SQLITE ]; then
 	FEATURES="$FEATURES sqlite"
 fi
+if [ -v ROCKS ]; then
+	FEATURES="$FEATURES rocks"
+fi
+
 
 # I just want the smallest possible binary, so I enable nothing for now
 #FEATURES="--no-default-features"
