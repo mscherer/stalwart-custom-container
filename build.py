@@ -36,7 +36,7 @@ if len(sys.argv) >= 2:
 
 print(rpm_to_install)
 if len(rpm_to_install) > 0:
-    dnf_cmd = ['dnf', 'install', '-y']
+    dnf_cmd = ['dnf', 'install', '-y', '--setopt=install_weak_deps=False']
     dnf_cmd.extend(rpm_to_install)
     subprocess.run(dnf_cmd)
 
