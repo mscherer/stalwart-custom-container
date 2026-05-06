@@ -22,7 +22,7 @@ rpm_features = {
     # coordination
     'nats': [],
     'zenoh': [],
-    'kafka': ['gcc-c++', 'cmake'],
+    'kafka': ['gcc-c++', 'cmake', 'libstdc++-static'],
     # non free stuff
     'enterprise': [],
 }
