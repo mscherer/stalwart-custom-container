@@ -49,7 +49,7 @@ RUSTFLAGS='-C target-feature=+crt-static' cargo build --release --target $(rustc
 
 mv target/$(rustc --print host-tuple)/release/stalwart ./stalwart.bin 
 rm -Rf target
-
+ls -lh ./stalwart.bin 
 EORUN
 
 FROM scratch
