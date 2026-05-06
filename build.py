@@ -7,7 +7,7 @@ import shutil
 REPOS='stalwartlabs/stalwart'
 TAG='latest'
 API_URL=f'https://api.github.com/repos/{REPOS}/releases/{TAG}' 
-BUILD='debug'
+BUILD='dev'
 
 rpm_features = {
     # storage
