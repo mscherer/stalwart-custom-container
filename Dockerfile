@@ -40,7 +40,7 @@ fi
 # I just want the smallest possible binary, so I enable nothing for now
 #FEATURES="--no-default-features"
 if [ -n "$FEATURES" ]; then
-	FEATURES="--features $FEATURES"
+	FEATURES="--features \"$FEATURES\""
 fi;
 FEATURES="--no-default-features $FEATURES"
 
