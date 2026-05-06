@@ -6,9 +6,10 @@ import shutil
 
 REPOS='stalwartlabs/stalwart'
 TAG='latest'
-API_URL=f'https://api.github.com/repos/{REPOS}/releases/{TAG}' 
-BUILD='dev'
+# either 'debug' or 'release'
+BUILD='debug'
 
+API_URL=f'https://api.github.com/repos/{REPOS}/releases/{TAG}'
 rpm_features = {
     # storage
     'sqlite': [],
@@ -64,7 +65,7 @@ subprocess.run(git_cmd)
 
 os.chdir('code')
 
-target = subprocess.run(['rustc', '--print', 'host-tuple'],capture_output=True).stdout.strip()
+target = subprocess.run(['rustc', '--print', 'host-tuple'],capture_output=True).stdout.decode('utf-8').strip()
 
 command = ['cargo', 'build', '--target', target, '--no-default-features']
 if BUILD == 'release':
