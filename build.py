@@ -2,6 +2,7 @@ import sys
 import subprocess
 import requests
 import os
+import shutil
 
 REPOS='stalwartlabs/stalwart'
 TAG='latest'
