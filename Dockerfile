@@ -5,7 +5,7 @@ WORKDIR /srv/
 RUN dnf install -y cargo glibc-static git jq curl --setopt=install_weak_deps=False && dnf clean all
 
 RUN <<EORUN
-set -e
+set -ex
 
 FEATURES=
 PACKAGES=
