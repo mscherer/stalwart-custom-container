@@ -13,7 +13,7 @@ rpm_features = {
     'sqlite': [],
     'postgres': [],
     'mysql': [],
-    'foundation': [],
+    'foundation': ['clang-devel'],
     'rocks': ['clang-devel'],
     's3': [],
     'redis': [],
