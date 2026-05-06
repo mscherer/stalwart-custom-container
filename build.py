@@ -62,7 +62,7 @@ subprocess.run(git_cmd)
 
 os.chdir(REPOS.split('/')[1])
 
-target = subprocess.run(['rustc', '--print', 'host-tuple'],capture_output=True).stdout
+target = subprocess.run(['rustc', '--print', 'host-tuple'],capture_output=True).stdout.strip()
 
 command = ['cargo', 'build', '--release', '--target', target, '--no-default-features']
 command.extend(features_arg)
