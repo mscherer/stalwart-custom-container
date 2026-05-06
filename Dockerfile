@@ -9,7 +9,7 @@ RUN <<EORUN
 set -ex
 # possible features, see the script build.py
 # list found with $ grep -r 'cfg(feature' . | sed 's/.*:\s*//'  | sort -u
-FEATURES="sqlite"
+FEATURES="sqlite mysql"
 
 python3 /usr/local/bin/build.py $FEATURES
 
