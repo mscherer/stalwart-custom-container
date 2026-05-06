@@ -7,12 +7,12 @@ REPOS='stalwartlabs/stalwart'
 TAG='latest'
 API_URL=f'https://api.github.com/repos/{REPOS}/releases/{TAG}' 
 
-# TODO add foundation/foundationdb
 rpm_features = {
     # storage
     'sqlite': [],
     'postgres': [],
     'mysql': [],
+    'foundation': [],
     'rocks': [],
     's3': [],
     'redis': [],
