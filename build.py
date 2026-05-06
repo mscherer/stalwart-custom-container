@@ -26,7 +26,11 @@ rpm_features = {
     'entreprise': [],
 }
 
-rpm_to_install=['cargo', 'glibc-static', 'git']
+rpm_to_install = [
+    'cargo',
+    'glibc-static',
+    'git'
+]
 
 features_arg=[]
 if len(sys.argv) >= 2:
@@ -34,21 +38,25 @@ if len(sys.argv) >= 2:
         rpm_to_install.extend(rpm_features[i])
     features_arg = ['--features',  ' '.join(sys.argv[1:])]
 
-print(rpm_to_install)
 if len(rpm_to_install) > 0:
-    dnf_cmd = ['dnf', 'install', '-y', '--setopt=install_weak_deps=False']
+    dnf_cmd = [
+                'dnf',
+                'install',
+                '-y',
+                '--setopt=install_weak_deps=False'
+    ]
     dnf_cmd.extend(rpm_to_install)
     subprocess.run(dnf_cmd)
 
 latest_release_tag = requests.get(API_URL).json()['tag_name']
+
 git_cmd = [
     'git',
     'clone',
-    '--depth=1', 
+    '--depth=1',
     f'https://github.com/{REPOS}.git',
     f'--revision={latest_release_tag}'
 ]
-
 subprocess.run(git_cmd)
 
 os.chdir(REPOS.split('/')[1])
@@ -59,6 +67,7 @@ command = ['cargo', 'build', '--release', '--target', target, '--no-default-feat
 command.extend(features_arg)
 
 # see https://msfjarvis.dev/posts/building-static-rust-binaries-for-linux/
-e = {'RUSTFLAGS': '-C target-feature=+crt-static'}
+e = os.environ
+e['RUSTFLAGS']='-C target-feature=+crt-static'
 
 subprocess.run(command, env=e)
