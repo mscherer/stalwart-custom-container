@@ -9,11 +9,12 @@ RUN <<EORUN
 set -ex
 # possible features, see the script build.py
 # list found with $ grep -r 'cfg(feature' . | sed 's/.*:\s*//'  | sort -u
-FEATURES="foundation"
+FEATURES="rocks"
 
 python3 /usr/local/bin/build.py $FEATURES
 
 #TODO move that in the script
+cd stalwart
 mv target/$(rustc --print host-tuple)/release/stalwart ./stalwart.bin 
 rm -Rf target
 ls -lh ./stalwart.bin 
