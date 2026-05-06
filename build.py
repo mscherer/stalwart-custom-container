@@ -64,7 +64,7 @@ os.chdir(REPOS.split('/')[1])
 
 target = subprocess.run(['rustc', '--print', 'host-tuple'],capture_output=True).stdout.strip()
 
-command = ['cargo', 'build', '--release', '--target', target, '--no-default-features']
+command = ['cargo', 'build', '--target', target, '--no-default-features']
 command.extend(features_arg)
 
 # see https://msfjarvis.dev/posts/building-static-rust-binaries-for-linux/
