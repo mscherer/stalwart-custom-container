@@ -6,11 +6,20 @@ RUN dnf install -y cargo glibc-static git jq curl --setopt=install_weak_deps=Fal
 
 RUN <<EORUN
 set -e
+
+FEATURES=
+PACKAGES=
 # possible features:
-# sqlite -- sqlite storage
-# postgres -- postgres storage
-# mysql -- mysql storage
+# storage:
+#   sqlite -- sqlite storage
+SQLITE=
+#   postgres -- postgres storage
+POSTGRES=
+#   mysql -- mysql storage
+MYSQL=
 # rocks -- storage on disk
+ROCKS=
+
 # s3 -- support any s3 compatible storage 
 # redis -- redis support
 # azure -- azure blob support
@@ -20,15 +29,20 @@ set -e
 #
 # list found with $ grep -r 'cfg(feature' . | sed 's/.*:\s*//'  | sort -u
 
+if [ -v SQLITE ]; then
+	FEATURES="$FEATURES sqlite"
+fi
+
 # I just want the smallest possible binary, so I enable nothing for now
-#FEATURES="--no-default-features --features postgres"
-FEATURES="--no-default-features"
+#FEATURES="--no-default-features"
+if [ -v FEATURES ]; then
+	FEATURES="--features $FEATURES"
+fi;
+FEATURES="--no-default-features $FEATURES"
 
 REV=$(curl -s "https://api.github.com/repos/stalwartlabs/stalwart/releases/latest" | jq -r .tag_name)
-
 git clone --depth=1 https://github.com/stalwartlabs/stalwart.git --revision=${REV}
 cd stalwart 
-
 # see https://msfjarvis.dev/posts/building-static-rust-binaries-for-linux/
 # run on 1 single line to not take too much space on my disk with the intermediate container
 RUSTFLAGS='-C target-feature=+crt-static' cargo build --release --target $(rustc --print host-tuple) $FEATURES 
