@@ -24,7 +24,7 @@ rpm_features = {
     'zenoh': [],
     'kafka': ['gcc-c++', 'cmake'],
     # non free stuff
-    'entreprise': [],
+    'enterprise': [],
 }
 
 rpm_to_install = [
