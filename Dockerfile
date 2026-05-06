@@ -8,10 +8,9 @@ COPY build.py /usr/local/bin/build.py
 RUN <<EORUN
 # possible features, see the script build.py
 # list found with $ grep -r 'cfg(feature' . | sed 's/.*:\s*//'  | sort -u
-FEATURES=""
+FEATURES="rocks"
 
 python3 /usr/local/bin/build.py $FEATURES
-
 ls -lh /srv/stalwart
 EORUN
 
