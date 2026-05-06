@@ -71,3 +71,5 @@ e = os.environ
 e['RUSTFLAGS']='-C target-feature=+crt-static'
 
 subprocess.run(command, env=e)
+
+shutil.move(f'target/{target}/release/stalwart', './stalwart.bin')

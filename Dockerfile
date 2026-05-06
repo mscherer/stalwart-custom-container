@@ -6,17 +6,12 @@ RUN dnf install -y git python3-requests --setopt=install_weak_deps=False && dnf 
 COPY build.py /usr/local/bin/build.py
 
 RUN <<EORUN
-set -ex
 # possible features, see the script build.py
 # list found with $ grep -r 'cfg(feature' . | sed 's/.*:\s*//'  | sort -u
 FEATURES="postgres"
 
 python3 /usr/local/bin/build.py $FEATURES
 
-#TODO move that in the script
-cd stalwart
-mv target/$(rustc --print host-tuple)/release/stalwart ./stalwart.bin 
-rm -Rf target
 ls -lh ./stalwart.bin 
 EORUN
 
