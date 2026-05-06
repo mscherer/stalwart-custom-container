@@ -7,6 +7,7 @@ import shutil
 REPOS='stalwartlabs/stalwart'
 TAG='latest'
 API_URL=f'https://api.github.com/repos/{REPOS}/releases/{TAG}' 
+BUILD='debug'
 
 rpm_features = {
     # storage
@@ -65,6 +66,8 @@ os.chdir(REPOS.split('/')[1])
 target = subprocess.run(['rustc', '--print', 'host-tuple'],capture_output=True).stdout.strip()
 
 command = ['cargo', 'build', '--target', target, '--no-default-features']
+if BUILD == 'release':
+    command.extend(['--release'])
 command.extend(features_arg)
 
 # see https://msfjarvis.dev/posts/building-static-rust-binaries-for-linux/
@@ -73,4 +76,4 @@ e['RUSTFLAGS']='-C target-feature=+crt-static'
 
 subprocess.run(command, env=e)
 
-shutil.move(f'target/{target}/release/stalwart', './stalwart.bin')
+shutil.move(f'target/{target}/{BUILD}/stalwart', './stalwart.bin')
