@@ -12,10 +12,10 @@ FEATURES=""
 
 python3 /usr/local/bin/build.py $FEATURES
 
-ls -lh ./stalwart.bin 
+ls -lh /srv/stalwart
 EORUN
 
 FROM scratch
 EXPOSE 2507
-COPY --from=0 /srv/stalwart/stalwart.bin /srv/stalwart
+COPY --from=0 /srv/stalwart /srv/stalwart
 CMD ["/srv/stalwart"]

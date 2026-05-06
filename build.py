@@ -57,11 +57,12 @@ git_cmd = [
     'clone',
     '--depth=1',
     f'https://github.com/{REPOS}.git',
-    f'--revision={latest_release_tag}'
+    f'--revision={latest_release_tag}',
+    'code'
 ]
 subprocess.run(git_cmd)
 
-os.chdir(REPOS.split('/')[1])
+os.chdir('code')
 
 target = subprocess.run(['rustc', '--print', 'host-tuple'],capture_output=True).stdout.strip()
 
@@ -76,4 +77,4 @@ e['RUSTFLAGS']='-C target-feature=+crt-static'
 
 subprocess.run(command, env=e)
 
-shutil.move(f'target/{target}/{BUILD}/stalwart', './stalwart.bin')
+shutil.move(f'target/{target}/{BUILD}/stalwart', '/srv/stalwart')
