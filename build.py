@@ -16,7 +16,7 @@ rpm_features = {
     'postgres': [],
     'mysql': [],
     'foundation': ['clang-devel'],
-    'rocks': ['clang-devel'],
+    'rocks': ['clang-devel', 'libstdc++-static'],
     's3': [],
     'redis': [],
     # azure blob support
