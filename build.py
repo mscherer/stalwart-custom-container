@@ -29,6 +29,12 @@ rpm_features = {
     'enterprise': [],
 }
 
+not_working_features = [
+    # do not work, requires a static version of the library not packaged on Fedora
+    # /usr/bin/ld.bfd: cannot find -lfdb_c: No such file or directory
+    'foundation',
+]
+
 rpm_to_install = [
     'cargo',
     'glibc-static',
@@ -39,6 +45,9 @@ features_arg=[]
 if len(sys.argv) >= 2:
     for i in sys.argv[1:]:
         rpm_to_install.extend(rpm_features[i])
+        if i in not_working_features:
+            print(f"feature {i} is not supported for the static build, see the script for details")
+            sys.exit(255)
     features_arg = ['--features',  ' '.join(sys.argv[1:])]
 
 if len(rpm_to_install) > 0:
