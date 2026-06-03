@@ -10,8 +10,8 @@ updates:
     schedule:
       interval: "weekly"
 
-  # Maintain dependencies for the bootc container
+  # Maintain dependencies for the container
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
