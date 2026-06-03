@@ -4,12 +4,12 @@ import requests
 import os
 import shutil
 
-REPOS='stalwartlabs/stalwart'
-TAG='latest'
+REPOS = 'stalwartlabs/stalwart'
+TAG = 'latest'
 # either 'debug' or 'release'
-BUILD='release'
+BUILD = 'release'
 
-API_URL=f'https://api.github.com/repos/{REPOS}/releases/{TAG}'
+API_URL = f'https://api.github.com/repos/{REPOS}/releases/{TAG}'
 rpm_features = {
     # storage
     'sqlite': [],
@@ -41,21 +41,22 @@ rpm_to_install = [
     'git'
 ]
 
-features_arg=[]
+features_arg = []
 if len(sys.argv) >= 2:
     for i in sys.argv[1:]:
         rpm_to_install.extend(rpm_features[i])
         if i in not_working_features:
-            print(f"feature {i} is not supported for the static build, see the script for details")
+            print(
+                f"feature {i} is not supported for the static build, see the script for details")
             sys.exit(255)
     features_arg = ['--features',  ' '.join(sys.argv[1:])]
 
 if len(rpm_to_install) > 0:
     dnf_cmd = [
-                'dnf',
-                'install',
-                '-y',
-                '--setopt=install_weak_deps=False'
+        'dnf',
+        'install',
+        '-y',
+        '--setopt=install_weak_deps=False'
     ]
     dnf_cmd.extend(rpm_to_install)
     subprocess.run(dnf_cmd)
@@ -74,7 +75,8 @@ subprocess.run(git_cmd)
 
 os.chdir('code')
 
-target = subprocess.run(['rustc', '--print', 'host-tuple'],capture_output=True).stdout.decode('utf-8').strip()
+target = subprocess.run(['rustc', '--print', 'host-tuple'],
+                        capture_output=True).stdout.decode('utf-8').strip()
 
 command = ['cargo', 'build', '--target', target, '--no-default-features']
 if BUILD == 'release':
@@ -83,7 +85,7 @@ command.extend(features_arg)
 
 # see https://msfjarvis.dev/posts/building-static-rust-binaries-for-linux/
 e = os.environ
-e['RUSTFLAGS']='-C target-feature=+crt-static'
+e['RUSTFLAGS'] = '-C target-feature=+crt-static'
 
 subprocess.run(command, env=e)
 
