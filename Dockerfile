@@ -1,4 +1,7 @@
 FROM quay.io/fedora/fedora-minimal@sha256:e9b141e60f92a68c8bc9c4a10cf565a6d0694b5bc718aed6a72cdc1e48472ebd
+
+
+
 LABEL org.opencontainers.image.source="https://github.com/mscherer/stalwart-custom-container"
 LABEL maintainer="mscherer@"
 WORKDIR /srv/
@@ -15,6 +18,5 @@ ls -lh /srv/stalwart
 EORUN
 
 FROM scratch
-EXPOSE 2507
 COPY --from=0 /srv/stalwart /srv/stalwart
 CMD ["/srv/stalwart"]
