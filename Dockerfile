@@ -28,7 +28,7 @@ EXPOSE 110 995
 EXPOSE 143 993
 # sieve
 EXPOSE 4190
-VOLUME ["/etc/stalwart", "/var/lib/stalwart"]
+VOLUME ["/etc/stalwart", "/var/lib/stalwart", "/etc/pki"]
 COPY --from=0 /srv/stalwart /srv/stalwart
 ENTRYPOINT ["/srv/stalwart"]
 CMD ["--config", "/etc/stalwart/config.json"]
