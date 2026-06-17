@@ -1,4 +1,4 @@
-FROM quay.io/fedora/fedora-minimal@sha256:fe8250f5eb8162f7a748a4a5d3ba95c4e4cfc676993ac32b3d1b4d5ebc40d343
+FROM quay.io/fedora/fedora-minimal@sha256:2f2622b877a4879002d6b040b07ff9a29d3c727de95049ca85defaf182afbc76
 
 
 
