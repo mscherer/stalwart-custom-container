@@ -90,3 +90,5 @@ e['RUSTFLAGS'] = '-C target-feature=+crt-static'
 subprocess.run(command, env=e)
 
 shutil.move(f'target/{target}/{BUILD}/stalwart', '/srv/stalwart')
+
+print(f"Built stalwart version {latest_release_tag}")
