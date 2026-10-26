@@ -25,6 +25,13 @@ rpm_features = {
     'nats': [],
     'zenoh': [],
     'kafka': ['gcc-c++', 'cmake', 'libstdc++-static', 'curl-devel'],
+    # others
+    # jmap for caldav
+    #'jmap': [],
+    # rkyv for caldav
+    #'rkyv': [],
+    # dev mode, for dev
+    #'dev_mode': [],
     # non free stuff
     'enterprise': [],
 }
